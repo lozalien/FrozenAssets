@@ -1,0 +1,60 @@
+Name,Category,Quantity,Date Frozen,Expiration Date,Notes,Tags,Weight,Weight Unit,Max Freeze Days
+Boneless Chicken Breast,Chicken,4,2024-01-15,2024-07-15,Fresh from Costco,protein;dinner;bulk,2.5,lbs,180
+Chicken Thighs Bone-In,Chicken,6,2024-02-01,2024-08-01,Family pack sale,protein;dark-meat;bone-in,3.2,lbs,180
+Ground Chicken,Chicken,2,2024-03-10,2024-09-10,Lean ground for burgers,protein;ground;lean,1.0,lbs,180
+Chicken Wings,Chicken,12,2024-12-01,2025-06-01,Party wings - buffalo style,protein;wings;party,2.8,lbs,180
+Whole Chicken,Chicken,1,2024-11-20,2025-05-20,Organic free-range,protein;whole;organic,4.5,lbs,180
+Ribeye Steak,Beef,2,2024-01-20,2024-07-20,Premium cut - date night,protein;steak;premium,1.8,lbs,270
+Ground Beef 80/20,Beef,3,2024-02-15,2024-08-15,For tacos and burgers,protein;ground;80-20,2.0,lbs,270
+Chuck Roast,Beef,1,2024-03-01,2024-09-01,"Perfect for slow cooking, pot roast",protein;roast;slow-cook,4.2,lbs,270
+Beef Short Ribs,Beef,8,2024-11-15,2025-05-15,BBQ weekend special,protein;ribs;bbq,3.5,lbs,270
+Sirloin Tip Steak,Beef,4,2024-12-10,2025-06-10,Marinated in soy sauce,protein;steak;marinated,2.1,lbs,270
+Pork Chops,Pork,6,2024-01-25,2024-07-25,Thick cut bone-in,protein;chops;bone-in,2.3,lbs,180
+Ground Pork,Pork,2,2024-02-20,2024-08-20,For homemade sausages,protein;ground;sausage,1.5,lbs,180
+Pork Tenderloin,Pork,1,2024-03-15,2024-09-15,Herb crusted preparation,protein;tenderloin;herbs,1.2,lbs,180
+Baby Back Ribs,Pork,2,2024-11-25,2025-05-25,"Competition style ribs, dry rub applied",protein;ribs;competition,4.0,lbs,180
+Pork Shoulder,Pork,1,2024-12-05,2025-06-05,Boston butt for pulled pork,protein;shoulder;pulled-pork,5.8,lbs,180
+Salmon Fillets,Fish,4,2024-01-30,2024-04-30,Wild caught Alaskan,protein;salmon;wild-caught,1.8,lbs,90
+Cod Fillets,Fish,3,2024-02-25,2024-05-25,Fresh from Atlantic,protein;cod;atlantic,1.4,lbs,90
+Shrimp Raw Large,Fish,2,2024-03-20,2024-06-20,31-40 count per pound,protein;shrimp;large,2.0,lbs,90
+Tuna Steaks,Fish,2,2024-11-30,2025-02-28,Sushi grade yellowfin,protein;tuna;sushi-grade,1.0,lbs,90
+Whole Red Snapper,Fish,1,2024-12-15,2025-03-15,Mediterranean style prep,protein;snapper;whole,2.5,lbs,90
+Beef Stew,Cooked Meals,4,2024-01-10,2024-04-10,Homemade with root vegetables,ready-meal;beef;vegetables,32,oz,90
+Chicken Alfredo,Cooked Meals,2,2024-02-05,2024-05-05,"Creamy pasta with grilled chicken, family favorite",ready-meal;pasta;chicken,24,oz,90
+Lasagna,Cooked Meals,1,2024-03-12,2024-06-12,Homemade with ricotta and meat sauce,ready-meal;pasta;cheese,48,oz,90
+Chili Con Carne,Cooked Meals,6,2024-11-10,2025-02-10,Spicy three-bean chili,ready-meal;beans;spicy,16,oz,90
+Shepherd's Pie,Cooked Meals,3,2024-12-20,2025-03-20,Traditional with lamb and potatoes,ready-meal;lamb;potatoes,28,oz,90
+Green Beans,Vegetables,2,2024-01-05,2025-01-05,Fresh from garden - blanched,vegetables;green;garden,12,oz,365
+Corn Kernels,Vegetables,4,2024-02-10,2025-02-10,Sweet corn off the cob,vegetables;corn;sweet,16,oz,365
+Broccoli Florets,Vegetables,3,2024-03-25,2025-03-25,Flash frozen for nutrition,vegetables;broccoli;nutrition,20,oz,365
+Mixed Vegetables,Vegetables,5,2024-11-05,2025-11-05,"Carrots, peas, corn blend",vegetables;mixed;blend,24,oz,365
+Spinach Leaves,Vegetables,2,2024-12-25,2025-12-25,Organic baby spinach,vegetables;spinach;organic,10,oz,365
+Strawberries,Fruits,3,2024-01-12,2024-07-12,Peak season berries,fruit;berries;peak,16,oz,180
+Blueberries,Fruits,4,2024-02-18,2024-08-18,Wild Maine blueberries,fruit;berries;wild,12,oz,180
+Mango Chunks,Fruits,2,2024-03-30,2024-09-30,Tropical sweetness preserved,fruit;tropical;sweet,20,oz,180
+Mixed Berry Blend,Fruits,6,2024-11-12,2025-05-12,"Strawberries, blueberries, raspberries",fruit;berries;mixed,32,oz,180
+Peach Slices,Fruits,3,2024-12-30,2025-06-30,Georgia peaches at prime ripeness,fruit;peaches;prime,24,oz,180
+Homemade Stock,Other,8,2024-01-08,2024-04-08,Chicken bone broth,liquid;stock;homemade,32,oz,90
+Pizza Dough,Other,4,2024-02-12,2024-08-12,Pre-made for quick dinners,dough;pizza;quick,16,oz,180
+Ice Cream Vanilla,Other,2,2024-03-05,2024-09-05,Premium French vanilla,dessert;ice-cream;premium,64,oz,180
+Bread Loaves,Other,3,2024-11-18,2025-02-18,Homemade sourdough,bread;sourdough;homemade,2,lbs,90
+Butter,Other,4,2024-12-12,2025-06-12,Unsalted European style,dairy;butter;unsalted,1,lbs,270
+"Spicy Thai Curry, Very Hot",Cooked Meals,2,2024-06-15,2024-09-15,"Contains ""ghost peppers"" - handle with care",ready-meal;thai;extremely-spicy,24,oz,90
+"Ground Beef, 85/15 Lean",Beef,5,2024-07-01,2025-01-01,"Leaner blend, perfect for health-conscious meals",protein;ground;lean,3,lbs,270
+Chicken Breast (Expired),Chicken,2,2023-06-01,2023-12-01,This item should show as expired,protein;expired;test,1.5,lbs,180
+Future Frozen Item,Chicken,1,2025-06-01,2025-12-01,This tests future dates,protein;future;test,2,lbs,180
+Very Old Item,Beef,1,2022-01-01,2022-07-01,Very old frozen item for testing,protein;very-old;test,1,lbs,270
+No Weight Item,Vegetables,3,2024-05-15,2025-05-15,Item with no weight specified,vegetables;no-weight,,,45
+Large Quantity Test,Chicken,999,2024-04-10,2024-10-10,Maximum quantity test,test;max-quantity;edge-case,50,lbs,180
+Single Item Test,Fish,1,2024-08-20,2024-11-20,Minimum quantity test,test;min-quantity;single,0.5,lbs,90
+Empty Notes Item,Pork,3,2024-09-10,2025-03-10,,protein;empty-notes;test,2.2,lbs,180
+Multi-Tag Item,Other,2,2024-10-05,2025-04-05,Item with many tags for testing,tag1;tag2;tag3;tag4;tag5;tag6;many-tags,1.8,lbs,120
+Special Characters Test,Cooked Meals,1,2024-11-01,2025-02-01,"Item with special chars: @#$%^&*()_+-=[]{}|;':""<>?/.,`~",special;characters;symbols,16,oz,90
+Decimal Weight,Chicken,2,2024-05-25,2024-11-25,Testing decimal weights,protein;decimal;test,1.75,lbs,180
+No Tags Item,Vegetables,4,2024-07-15,2025-07-15,Item without any tags,,vegetables;no-tags,18,oz,365
+Zero Days Frozen,Fish,1,2024-12-31,2024-12-31,Same day freeze and expire,protein;same-day;edge-case,0.8,lbs,0
+Long Name Test Item With Many Words To Test Display,Other,1,2024-08-15,2025-02-15,Testing very long item names in the system,test;long-name;display,3.3,lbs,180
+Different Units Test,Vegetables,10,2024-09-20,2025-09-20,Testing different weight units,vegetables;units;test,500,grams,365
+Fraction Weight,Pork,3,2024-06-30,2024-12-30,Testing fractional weights,protein;fraction;test,2.33,lbs,180
+Near Expiry Item,Chicken,2,2024-12-20,2024-12-25,Item expiring very soon,protein;near-expiry;urgent,1,lbs,180
+Far Future Expiry,Vegetables,1,2024-01-01,2026-01-01,Very long storage test,vegetables;long-storage;test,15,oz,730

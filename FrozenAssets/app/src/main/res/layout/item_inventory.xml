@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/item_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        style="@style/Widget.FrozenAssets.CardView">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/item_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+            <!-- Left side: Item details -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/text_primary"/>
+
+                <TextView
+                    android:id="@+id/text_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/text_secondary"/>
+
+                <TextView
+                    android:id="@+id/text_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/text_secondary"/>
+
+                <TextView
+                    android:id="@+id/text_frozen_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/text_secondary"/>
+
+                <TextView
+                    android:id="@+id/text_expiry_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/text_secondary"/>
+            </LinearLayout>
+
+            <!-- Vertical divider -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:background="?android:attr/listDivider"/>
+
+            <!-- Right side: Expiration countdown -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8">
+
+                <TextView
+                    android:id="@+id/text_expiration_countdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </FrameLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Selection overlay for visual feedback - covers entire card area including margins -->
+    <View
+        android:id="@+id/selection_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_selection_overlay"
+        android:alpha="0.1"
+        android:visibility="gone" />
+
+    <!-- Selection border overlay for modern appearance - covers entire card area -->
+    <View
+        android:id="@+id/selection_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/selected_card_border"
+        android:visibility="gone" />
+
+    <!-- Selection checkbox overlay - positioned in top right corner of entire area -->
+    <CheckBox
+        android:id="@+id/checkbox_select"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="12dp"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:background="@android:color/transparent"
+        android:buttonTint="?attr/colorPrimary"
+        android:scaleX="0.8"
+        android:scaleY="0.8" />
+
+</FrameLayout>

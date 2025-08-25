@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "727394719638",
+    "project_id": "frozenassets-b807a",
+    "storage_bucket": "frozenassets-b807a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727394719638:android:e552872e4c2c2fef3c2fb7",
+        "android_client_info": {
+          "package_name": "com.frozenassets.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ_GMYj7NhkSR7pCaPIgaNxy0E7h5VjHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727394719638:android:7f0eaff35735b3383c2fb7",
+        "android_client_info": {
+          "package_name": "com.frozenassets.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ_GMYj7NhkSR7pCaPIgaNxy0E7h5VjHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

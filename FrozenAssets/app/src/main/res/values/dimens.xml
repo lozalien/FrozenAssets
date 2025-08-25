@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="chip_min_height">32dp</dimen>
+    <dimen name="chip_text_padding">8dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="content_padding">16dp</dimen>
+    <dimen name="corner_radius_small">8dp</dimen>
+    <dimen name="corner_radius_medium">12dp</dimen>
+    <dimen name="corner_radius_large">16dp</dimen>
+</resources>

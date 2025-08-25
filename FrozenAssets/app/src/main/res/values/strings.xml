@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Existing strings -->
+    <string name="app_name">Frozen Assets</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="eat_soon">Eat Soon</string>
+    <string name="all_items">All Items</string>
+    <string name="settings">Settings</string>
+    <string name="categories">Categories</string>
+    <string name="chicken">Chicken</string>
+    <string name="beef">Beef</string>
+    <string name="pork">Pork</string>
+    <string name="fish">Fish</string>
+    <string name="cooked_meals">Cooked Meals</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="fruits">Fruits</string>
+    <string name="other">Other</string>
+    <string name="add_item">Add Item</string>
+    <string name="save">Save</string>
+    <string name="item_name">Item Name</string>
+    <string name="category">Category</string>
+    <string name="quantity">Quantity</string>
+    <string name="date_frozen">Date Frozen</string>
+    <string name="title_activity_item_detail">Item Details</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="confirm_delete">Are you sure you want to delete this item?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit">Edit</string>
+    <string name="frozen_on">Frozen on: %1$s</string>
+    <string name="expires_on">Expires on: %1$s</string>
+    <string name="category_label">Category: %1$s</string>
+    <string name="quantity_label">Quantity: %d</string>
+    <string name="error_name_required">Name is required</string>
+    <string name="error_name_too_short">Name must be at least 2 characters</string>
+    <string name="error_category_required">Category is required</string>
+    <string name="error_invalid_category">Invalid category</string>
+    <string name="error_quantity_required">Quantity is required</string>
+    <string name="error_quantity_positive">Quantity must be greater than 0</string>
+    <string name="error_quantity_too_large">Quantity cannot exceed 999</string>
+    <string name="error_invalid_quantity">Invalid quantity</string>
+    <string name="error_fix_form">Please fix the errors before saving</string>
+    <string name="item_saved">Item saved successfully</string>
+    <string name="item_deleted">Item deleted successfully</string>
+    <string name="item_updated">Item updated successfully</string>
+    <string name="tags">Tags</string>
+    <string name="select_tags">Select Tags</string>
+    <string name="title_activity_edit_item">Edit Item</string>
+    <string name="edit_coming_soon">Edit functionality coming soon</string>
+    <string name="selected_item">Selected: %1$s</string>
+    <string name="no_items">No items found</string>
+    <string name="loading">Loading…</string>
+    <string name="valid_input">Valid input</string>
+    <string name="unsaved_changes">Unsaved Changes</string>
+    <string name="confirm_exit">Are you sure you want to exit? Any unsaved changes will be lost.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="max_freeze_time">Max Freeze Time:</string>
+    <string name="days">days</string>
+    <string name="decrease_time">Decrease time</string>
+    <string name="increase_time">Increase time</string>
+    <string name="usda_recommended">USDA Recommended: %d days</string>
+
+    <string name="unit_optional">Unit (Optional)</string>
+    <string name="unit_hint">Enter unit details</string>
+    <string name="helper_unit">Example: kg, 1/2 Pan, Freezer Bag</string>
+
+
+
+    <!-- Helper texts -->
+    <string name="helper_name">Enter item name</string>
+    <string name="helper_category">Select food category</string>
+    <string name="helper_quantity">Enter number of items</string>
+    <string name="helper_date">Select when item was frozen</string>
+    <string name="helper_tags">Select applicable tags</string>
+
+    <!-- Date validation -->
+    <string name="future_date">Cannot select a future date</string>
+    <string name="invalid_date">Please select a valid date</string>
+    <string name="too_old_date">Date cannot be more than 1 year old</string>
+
+    <!-- Expiration messages -->
+    <string name="days_until_expiration">Expiring in\n%d days</string>
+    <string name="days_since_expired">%d Days\nExpired</string>
+
+
+    <plurals name="freeze_time_months">
+        <item quantity="one">%d Month</item>
+        <item quantity="other">%d Months</item>
+    </plurals>
+
+    <!-- Settings strings -->
+    <string name="import_export">Import/Export Data</string>
+    <string name="export_data">Export Data</string>
+    <string name="import_data">Import Data</string>
+    <string name="export_csv">Export CSV</string>
+    <string name="export_json">Export JSON</string>
+    <string name="import_csv">Import CSV</string>
+    <string name="import_json">Import JSON</string>
+    <string name="import_export_info">Export your inventory data to backup files or import from existing files. CSV format is compatible with spreadsheet applications.</string>
+    <string name="data_info">Data Information</string>
+    <string name="total_items_placeholder">Total items: Loading...</string>
+    <string name="last_export_placeholder">Last export: Never</string>
+    <string name="last_import_placeholder">Last import: Never</string>
+    <string name="total_items_count">Total items: %d</string>
+    <string name="last_export_date">Last export: %s</string>
+    <string name="last_import_date">Last import: %s</string>
+    <string name="export_successful">Data exported successfully to %s</string>
+    <string name="export_failed">Failed to export data: %s</string>
+    <string name="import_successful">Successfully imported %d items</string>
+    <string name="import_failed">Failed to import data: %s</string>
+    <string name="no_file_selected">No file selected</string>
+    <string name="permission_denied">Permission denied. Cannot access storage.</string>
+    <string name="creating_file">Creating export file...</string>
+    <string name="reading_file">Reading import file...</string>
+    <string name="confirm_import">Import %d items from file? This will add to your existing inventory.</string>
+    <string name="import_confirm_title">Confirm Import</string>
+    <string name="import_action">Import</string>
+    
+    <!-- Multi-select strings -->
+    <string name="multi_select_title">%d selected</string>
+    <string name="bulk_delete">Delete Selected</string>
+    <string name="select_all">Select All</string>
+    <string name="deselect_all">Deselect All</string>
+    <string name="confirm_bulk_delete_title">Delete Items</string>
+    <string name="confirm_bulk_delete_message">Are you sure you want to delete %d selected items? This action cannot be undone.</string>
+    <string name="bulk_delete_success">Deleted %d items successfully</string>
+    <string name="bulk_delete_failed">Failed to delete items: %s</string>
+</resources>

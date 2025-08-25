@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            style="@style/Widget.FrozenAssets.Toolbar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Item Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_layout"
+                style="@style/Widget.FrozenAssets.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/item_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Category Dropdown -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/category_layout"
+                style="@style/Widget.FrozenAssets.TextInputLayout.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/category">
+
+                <AutoCompleteTextView
+                    android:id="@+id/category_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Quantity -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/quantity_layout"
+                style="@style/Widget.FrozenAssets.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/quantity">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/quantity_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Unit Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/weight_layout"
+                style="@style/Widget.FrozenAssets.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/unit_optional">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/unit_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Date Frozen -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date_frozen_layout"
+                style="@style/Widget.FrozenAssets.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/date_frozen">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date_frozen_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Max Freeze Time Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max Freeze Time:"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/text_primary"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:id="@+id/decrease_time_button"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_remove"
+                    android:padding="12dp"
+                    android:contentDescription="Decrease freeze time"/>
+
+                <TextView
+                    android:id="@+id/freeze_time_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:minWidth="80dp"
+                    android:gravity="center"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/text_primary"/>
+
+                <ImageButton
+                    android:id="@+id/increase_time_button"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_add"
+                    android:padding="12dp"
+                    android:contentDescription="Increase freeze time"/>
+
+            </LinearLayout>
+
+            <!-- Tags Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/tags"
+                android:textAppearance="?attr/textAppearanceSubtitle1" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/tags_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:chipSpacingHorizontal="8dp"
+                app:chipSpacingVertical="8dp"
+                app:singleSelection="false" />
+
+            <!-- Save Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save_button"
+                style="@style/Widget.FrozenAssets.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/save" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

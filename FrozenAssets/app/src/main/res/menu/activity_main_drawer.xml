@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_eat_soon"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="@string/eat_soon" />
+
+    <item
+        android:id="@+id/nav_all_items"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="@string/all_items" />
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/categories">
+            <menu>
+                <item
+                    android:id="@+id/nav_chicken"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="@string/chicken" />
+
+                <item
+                    android:id="@+id/nav_beef"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="@string/beef" />
+
+                <item
+                    android:id="@+id/nav_pork"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="@string/pork" />
+
+                <item
+                    android:id="@+id/nav_fish"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="@string/fish" />
+
+                <item
+                    android:id="@+id/nav_cooked_meals"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="@string/cooked_meals" />
+
+                <item
+                    android:id="@+id/nav_vegetables"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="@string/vegetables" />
+
+                <item
+                    android:id="@+id/nav_fruits"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="@string/fruits" />
+
+                <item
+                    android:id="@+id/nav_other"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="@string/other" />
+            </menu>
+        </item>
+    </group>
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/settings" />
+
+</menu>

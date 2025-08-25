@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="item_background" type="id"/>
+    <item name="text_expiration_countdown" type="id"/>
+    <item name="text_name" type="id"/>
+    <item name="text_category" type="id"/>
+    <item name="text_quantity" type="id"/>
+    <item name="text_frozen_date" type="id"/>
+    <item name="text_expiry_date" type="id"/>
+</resources>
