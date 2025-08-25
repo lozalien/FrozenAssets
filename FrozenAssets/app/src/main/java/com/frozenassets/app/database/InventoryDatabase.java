@@ -12,16 +12,18 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.frozenassets.app.models.InventoryItem;
+import com.frozenassets.app.models.Tag;
 import com.frozenassets.app.utils.DateConverter;
 import com.frozenassets.app.utils.ListConverter;
 
-@Database(entities = {InventoryItem.class}, version = 7, exportSchema = true)
+@Database(entities = {InventoryItem.class, Tag.class}, version = 10, exportSchema = true)
 @TypeConverters({DateConverter.class, ListConverter.class})
 public abstract class InventoryDatabase extends RoomDatabase {
     private static final String TAG = "InventoryDatabase";
     private static final String DATABASE_NAME = "inventory_database";
 
     public abstract InventoryDao inventoryDao();
+    public abstract TagDao tagDao();
     private static volatile InventoryDatabase INSTANCE;
 
     static final Migration MIGRATION_5_6 = new Migration(5, 6) {
@@ -87,6 +89,66 @@ public abstract class InventoryDatabase extends RoomDatabase {
         }
     };
 
+    static final Migration MIGRATION_7_8 = new Migration(7, 8) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            Log.d(TAG, "Performing migration from 7 to 8 - Adding tags table");
+            
+            // Create tags table to match Room entity expectations
+            database.execSQL(
+                "CREATE TABLE IF NOT EXISTS tags (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "name TEXT, " +
+                "isDefault INTEGER NOT NULL)"
+            );
+            
+            // Insert default tags
+            String[] defaultTags = {"Raw", "Cooked", "Leftover", "Meal Prep", "Breakfast", 
+                                   "Lunch", "Dinner", "Dessert", "Snack", "Organic", 
+                                   "Veggie", "Fruit", "Meat", "Seafood"};
+            
+            for (String tag : defaultTags) {
+                database.execSQL("INSERT OR IGNORE INTO tags (name, isDefault) VALUES ('" + tag + "', 1)");
+            }
+        }
+    };
+    
+    static final Migration MIGRATION_8_9 = new Migration(8, 9) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            Log.d(TAG, "Performing migration from 8 to 9 - Clean migration for tags");
+            // Empty migration - tags table should already exist from migration 7->8
+            // This is just to handle version increment for schema correction
+        }
+    };
+    
+    static final Migration MIGRATION_9_10 = new Migration(9, 10) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            Log.d(TAG, "Performing migration from 9 to 10 - Ensure clean tags table");
+            
+            // Drop existing tags table if it exists (clean slate)
+            database.execSQL("DROP TABLE IF EXISTS tags");
+            
+            // Create tags table with correct schema
+            database.execSQL(
+                "CREATE TABLE IF NOT EXISTS tags (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "name TEXT, " +
+                "isDefault INTEGER NOT NULL)"
+            );
+            
+            // Insert default tags
+            String[] defaultTags = {"Raw", "Cooked", "Leftover", "Meal Prep", "Breakfast", 
+                                   "Lunch", "Dinner", "Dessert", "Snack", "Organic", 
+                                   "Veggie", "Fruit", "Meat", "Seafood"};
+            
+            for (String tag : defaultTags) {
+                database.execSQL("INSERT INTO tags (name, isDefault) VALUES ('" + tag + "', 1)");
+            }
+        }
+    };
+
     public static InventoryDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (InventoryDatabase.class) {
@@ -96,7 +158,7 @@ public abstract class InventoryDatabase extends RoomDatabase {
                                         context.getApplicationContext(),
                                         InventoryDatabase.class,
                                         DATABASE_NAME)
-                                .addMigrations(MIGRATION_5_6, MIGRATION_6_7)
+                                .addMigrations(MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10)
                                 .fallbackToDestructiveMigration() // As a last resort
                                 .addCallback(new RoomDatabase.Callback() {
                                     @Override

@@ -320,7 +320,7 @@ public class AllItemsActivity extends AppCompatActivity implements NavigationVie
     private void navigateToCategory(String category) {
         try {
             Intent intent = new Intent(this, CategoryActivity.class);
-            intent.putExtra("category", category);
+            intent.putExtra(CategoryActivity.EXTRA_CATEGORY_NAME, category);
             startActivity(intent);
         } catch (Exception e) {
             Log.e(TAG, "Error navigating to category: " + category, e);

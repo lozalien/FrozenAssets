@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private InventoryViewModel viewModel;
     private InventoryAdapter adapter;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
-    private String currentCategoryName = null;
     private LiveData<List<InventoryItem>> currentItemsLiveData = null;
 
 
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setupAdMob();
 
             // Default to showing "Eat Soon" items
-            setTitle(R.string.eat_soon);
+            setTitle(R.string.expiring_items);
             loadExpiringItems();
 
             // Setup OnBackPressedCallback for Android 14+ compatibility
@@ -122,11 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void refreshCurrentView() {
-        if (currentCategoryName != null) {
-            loadCategory(currentCategoryName, false);
-        } else {
-            loadExpiringItems();
-        }
+        // MainActivity only handles "Eat Soon" view, categories are handled by CategoryActivity
+        loadExpiringItems();
     }
 
     private void loadExpiringItems() {
@@ -141,8 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (currentItemsLiveData != null) {
                 currentItemsLiveData.removeObservers(this);
             }
-
-            currentCategoryName = null;
             currentItemsLiveData = viewModel.getExpiringItems();
             if (currentItemsLiveData != null) {
                 currentItemsLiveData.observe(this, items -> {
@@ -283,24 +277,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int id = item.getItemId();
 
             if (id == R.id.nav_eat_soon) {
-                setTitle(R.string.eat_soon);
+                setTitle(R.string.expiring_items);
                 loadExpiringItems();
             } else if (id == R.id.nav_chicken) {
-                loadCategory(getString(R.string.chicken));
+                startCategoryActivity(getString(R.string.chicken));
             } else if (id == R.id.nav_beef) {
-                loadCategory(getString(R.string.beef));
+                startCategoryActivity(getString(R.string.beef));
             } else if (id == R.id.nav_pork) {
-                loadCategory(getString(R.string.pork));
+                startCategoryActivity(getString(R.string.pork));
             } else if (id == R.id.nav_fish) {
-                loadCategory(getString(R.string.fish));
+                startCategoryActivity(getString(R.string.fish));
             } else if (id == R.id.nav_cooked_meals) {
-                loadCategory(getString(R.string.cooked_meals));
+                startCategoryActivity(getString(R.string.cooked_meals));
             } else if (id == R.id.nav_vegetables) {
-                loadCategory(getString(R.string.vegetables));
+                startCategoryActivity(getString(R.string.vegetables));
             } else if (id == R.id.nav_fruits) {
-                loadCategory(getString(R.string.fruits));
+                startCategoryActivity(getString(R.string.fruits));
             } else if (id == R.id.nav_other) {
-                loadCategory(getString(R.string.other));
+                startCategoryActivity(getString(R.string.other));
             } else if (id == R.id.nav_all_items) {
                 startActivity(new Intent(this, AllItemsActivity.class));
             } else if (id == R.id.nav_settings) {
@@ -315,45 +309,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void loadCategory(String category, boolean setTitle) {
-        // Ensure viewModel is not null and activity is not finishing
-        if (viewModel == null || isFinishing() || isDestroyed()) {
-            Log.w(TAG, "Cannot load category - activity state invalid");
-            return;
-        }
-
+    private void startCategoryActivity(String category) {
         try {
-            Log.d(TAG, "Loading category: " + category);
-
-            // Remove previous observer if exists
-            if (currentItemsLiveData != null) {
-                currentItemsLiveData.removeObservers(this);
-            }
-
-            currentCategoryName = category;
-            if (setTitle) {
-                setTitle(category);
-            }
-
-            currentItemsLiveData = viewModel.getItemsByCategory(category);
-            if (currentItemsLiveData != null) {
-                currentItemsLiveData.observe(this, items -> {
-                    if (isFinishing() || isDestroyed()) return;
-                    
-                    Log.d(TAG, "Category " + category + " updated. Count: " + (items != null ? items.size() : 0));
-                    if (adapter != null) {
-                        adapter.submitList(null); // Clear current list
-                        adapter.submitList(items); // Add new items
-                    }
-                });
-            }
+            Log.d(TAG, "Starting CategoryActivity for: " + category);
+            Intent intent = new Intent(this, CategoryActivity.class);
+            intent.putExtra(CategoryActivity.EXTRA_CATEGORY_NAME, category);
+            startActivity(intent);
         } catch (Exception e) {
-            Log.e(TAG, "Error loading category: " + category, e);
+            Log.e(TAG, "Error starting CategoryActivity for: " + category, e);
+            Toast.makeText(this, "Error opening " + category + " category", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void loadCategory(String category) {
-        loadCategory(category, true);
     }
 
     private void setupOnBackPressedCallback() {

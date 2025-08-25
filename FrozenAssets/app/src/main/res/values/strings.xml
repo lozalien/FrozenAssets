@@ -4,7 +4,8 @@
     <string name="app_name">Frozen Assets</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="eat_soon">Eat Soon</string>
+    <string name="eat_soon">Expiring Items</string>
+    <string name="expiring_items">Expiring Items</string>
     <string name="all_items">All Items</string>
     <string name="settings">Settings</string>
     <string name="categories">Categories</string>

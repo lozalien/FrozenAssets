@@ -78,7 +78,7 @@ public class EatSoonActivity extends AppCompatActivity implements NavigationView
             setupAdMob();
 
             // Set title and load expiring items
-            setTitle(getString(R.string.eat_soon));
+            setTitle(getString(R.string.expiring_items));
             loadExpiringItems();
 
             // Setup OnBackPressedCallback for Android 14+ compatibility

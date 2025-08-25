@@ -16,11 +16,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.activity.OnBackPressedCallback;
 
 import com.frozenassets.app.R;
 import com.frozenassets.app.models.FoodCategory;
 import com.frozenassets.app.models.InventoryItem;
+import com.frozenassets.app.models.Tag;
 import com.frozenassets.app.ViewModels.InventoryViewModel;
+import com.frozenassets.app.database.InventoryDatabase;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -91,6 +94,7 @@ public class AddItemActivity extends AppCompatActivity {
 
         initializeViews();
         setupValidation();
+        setupOnBackPressedCallback();
 
         if (isEditMode && editItemId != -1) {
             loadExistingItem();
@@ -155,6 +159,12 @@ public class AddItemActivity extends AppCompatActivity {
 
         // Setup save button
         findViewById(R.id.save_button).setOnClickListener(v -> saveItem());
+        
+        // Setup manage tags button
+        findViewById(R.id.manage_tags_button).setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(this, TagsActivity.class);
+            startActivity(intent);
+        });
 
         // Set helper texts
         nameLayout.setHelperText(getString(R.string.helper_name));
@@ -249,21 +259,105 @@ public class AddItemActivity extends AppCompatActivity {
 
     private void setupTags() {
         tagsGroup.removeAllViews();
-        for (String tag : FoodCategory.COMMON_TAGS) {
-            Chip chip = new Chip(this);
-            chip.setText(tag);
-            chip.setCheckable(true);
-            chip.setClickable(true);
+        
+        // Load tags from database
+        InventoryDatabase.getDatabase(this).tagDao().getAllTags().observe(this, tags -> {
+            if (tags != null) {
+                tagsGroup.removeAllViews();
+                
+                for (Tag tag : tags) {
+                    Chip chip = new Chip(this);
+                    chip.setText(tag.getName());
+                    chip.setCheckable(true);
+                    chip.setClickable(true);
+                    chip.setCheckedIconVisible(false); // Hide checkmark icon
+                    chip.setRippleColorResource(R.color.primary);
+                    chip.setChipMinHeight(getResources().getDimensionPixelSize(R.dimen.chip_min_height));
+                    chip.setTextStartPadding(getResources().getDimensionPixelSize(R.dimen.chip_text_padding));
+                    chip.setTextEndPadding(getResources().getDimensionPixelSize(R.dimen.chip_text_padding));
+                    
+                    // Set styling based on selection state
+                    chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                        updateChipAppearance(chip, isChecked);
+                    });
+                    
+                    // Set initial appearance
+                    updateChipAppearance(chip, false);
+                    
+                    tagsGroup.addView(chip);
+                }
+                
+                // Add "Add Custom Tag" button
+                addCustomTagButton();
+            }
+        });
+    }
+    
+    private void updateChipAppearance(Chip chip, boolean isSelected) {
+        if (isSelected) {
+            chip.setChipBackgroundColorResource(R.color.primary);
+            chip.setTextColor(getResources().getColor(android.R.color.white, getTheme()));
+        } else {
             chip.setChipBackgroundColorResource(R.color.surface_variant);
             chip.setTextColor(getResources().getColor(R.color.text_primary, getTheme()));
-            chip.setCheckedIconVisible(true);
-            chip.setCheckedIconTintResource(R.color.primary);
-            chip.setRippleColorResource(R.color.primary);
-            chip.setChipMinHeight(getResources().getDimensionPixelSize(R.dimen.chip_min_height));
-            chip.setTextStartPadding(getResources().getDimensionPixelSize(R.dimen.chip_text_padding));
-            chip.setTextEndPadding(getResources().getDimensionPixelSize(R.dimen.chip_text_padding));
-            tagsGroup.addView(chip);
         }
+    }
+    
+    private void addCustomTagButton() {
+        Chip addButton = new Chip(this);
+        addButton.setText("+ Add Custom Tag");
+        addButton.setCheckable(false);
+        addButton.setClickable(true);
+        addButton.setChipBackgroundColorResource(R.color.surface_variant);
+        addButton.setTextColor(getResources().getColor(R.color.primary, getTheme()));
+        addButton.setRippleColorResource(R.color.primary);
+        addButton.setChipMinHeight(getResources().getDimensionPixelSize(R.dimen.chip_min_height));
+        addButton.setTextStartPadding(getResources().getDimensionPixelSize(R.dimen.chip_text_padding));
+        addButton.setTextEndPadding(getResources().getDimensionPixelSize(R.dimen.chip_text_padding));
+        
+        addButton.setOnClickListener(v -> showAddCustomTagDialog());
+        
+        tagsGroup.addView(addButton);
+    }
+    
+    private void showAddCustomTagDialog() {
+        android.widget.EditText editText = new android.widget.EditText(this);
+        editText.setHint("Enter custom tag name");
+        
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Add Custom Tag")
+                .setView(editText)
+                .setPositiveButton("Add", (dialog, which) -> {
+                    String tagName = editText.getText().toString().trim();
+                    if (!tagName.isEmpty()) {
+                        addCustomTag(tagName);
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+    
+    private void addCustomTag(String tagName) {
+        // Check if tag already exists
+        new Thread(() -> {
+            Tag existingTag = InventoryDatabase.getDatabase(this).tagDao().getTagByName(tagName);
+            if (existingTag == null) {
+                Tag newTag = new Tag(tagName, false);
+                InventoryDatabase.getDatabase(this).tagDao().insert(newTag);
+                
+                runOnUiThread(() -> {
+                    Snackbar.make(findViewById(android.R.id.content),
+                            "Tag '" + tagName + "' added successfully",
+                            Snackbar.LENGTH_SHORT).show();
+                });
+            } else {
+                runOnUiThread(() -> {
+                    Snackbar.make(findViewById(android.R.id.content),
+                            "Tag already exists",
+                            Snackbar.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
     }
 
     private void setupFreezeTimeControls() {
@@ -553,29 +647,32 @@ public class AddItemActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (hasUnsavedChanges()) {
-            new MaterialAlertDialogBuilder(this)
-                    .setTitle(R.string.unsaved_changes)
-                    .setMessage(R.string.confirm_exit)
-                    .setPositiveButton(R.string.yes, (dialog, which) -> super.onBackPressed())
-                    .setNegativeButton(R.string.no, null)
-                    .show();
-        } else {
-            super.onBackPressed();
-        }
+    private void setupOnBackPressedCallback() {
+        OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (hasUnsavedChanges()) {
+                    new MaterialAlertDialogBuilder(AddItemActivity.this)
+                            .setTitle(R.string.unsaved_changes)
+                            .setMessage(R.string.confirm_exit)
+                            .setPositiveButton(R.string.yes, (dialog, which) -> {
+                                setEnabled(false);
+                                getOnBackPressedDispatcher().onBackPressed();
+                            })
+                            .setNegativeButton(R.string.no, null)
+                            .show();
+                } else {
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                }
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
     }
 
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        // Modern activity transitions are handled automatically by the system
     }
 }

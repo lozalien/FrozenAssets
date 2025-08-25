@@ -77,6 +77,15 @@
             android:exported="false"
             android:name=".activities.SettingsActivity" />
 
+        <activity
+            android:exported="false"
+            android:name=".activities.TagsActivity"
+            android:parentActivityName=".activities.AddItemActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.AddItemActivity" />
+        </activity>
+
         <!-- Add this for Android 14+ compatibility -->
         <service
             android:name="androidx.room.MultiInstanceInvalidationService"
