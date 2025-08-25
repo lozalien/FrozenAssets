@@ -3,10 +3,9 @@ package com.frozenassets.app.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.WindowManager;
 import android.os.Build;
 
@@ -25,6 +24,7 @@ import androidx.activity.OnBackPressedCallback;
 import com.frozenassets.app.R;
 import com.frozenassets.app.adapters.InventoryAdapter;
 import com.frozenassets.app.models.InventoryItem;
+import com.frozenassets.app.models.SortOrder;
 import com.frozenassets.app.ViewModels.InventoryViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private InventoryViewModel viewModel;
     private InventoryAdapter adapter;
-    private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private LiveData<List<InventoryItem>> currentItemsLiveData = null;
+    private SortOrder currentSortOrder = SortOrder.EXPIRATION_ASC;
 
 
     @Override
@@ -137,12 +137,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (currentItemsLiveData != null) {
                 currentItemsLiveData.removeObservers(this);
             }
-            currentItemsLiveData = viewModel.getExpiringItems();
+            currentItemsLiveData = viewModel.getExpiringItems(currentSortOrder);
             if (currentItemsLiveData != null) {
                 currentItemsLiveData.observe(this, items -> {
                     if (isFinishing() || isDestroyed()) return;
                     
-                    Log.d(TAG, "Updating expiring items. Count: " + (items != null ? items.size() : 0));
+                    Log.d(TAG, "Updating expiring items. Count: " + (items != null ? items.size() : 0) + " with sort order: " + currentSortOrder);
                     if (adapter != null) {
                         adapter.submitList(null); // Clear current list
                         adapter.submitList(items); // Add new items
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 
                 adview.setAdListener(new com.google.android.gms.ads.AdListener() {
                     @Override
-                    public void onAdFailedToLoad(com.google.android.gms.ads.LoadAdError loadAdError) {
+                    public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
                         Log.w(TAG, "Ad failed to load: " + loadAdError.getMessage());
                     }
                     
@@ -319,6 +319,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.e(TAG, "Error starting CategoryActivity for: " + category, e);
             Toast.makeText(this, "Error opening " + category + " category", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem sortItem = menu.findItem(R.id.action_sort);
+        if (sortItem != null) {
+            // Update the sort icon title based on current sort order
+            if (currentSortOrder == SortOrder.EXPIRATION_ASC) {
+                sortItem.setTitle(R.string.sort_expiring_first);
+            } else {
+                sortItem.setTitle(R.string.sort_expiring_last);
+            }
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_sort) {
+            toggleSortOrder();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void toggleSortOrder() {
+        // Toggle the sort order
+        currentSortOrder = (currentSortOrder == SortOrder.EXPIRATION_ASC) 
+            ? SortOrder.EXPIRATION_DESC 
+            : SortOrder.EXPIRATION_ASC;
+        
+        // Refresh the menu to update the icon
+        invalidateOptionsMenu();
+        
+        // Reload the data with new sort order
+        loadExpiringItems();
     }
 
     private void setupOnBackPressedCallback() {

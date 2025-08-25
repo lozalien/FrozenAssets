@@ -30,11 +30,20 @@ public interface InventoryDao {
     @Query("SELECT * FROM inventory_items ORDER BY expirationDate ASC")
     LiveData<List<InventoryItem>> getAllItems();
 
+    @Query("SELECT * FROM inventory_items ORDER BY expirationDate DESC")
+    LiveData<List<InventoryItem>> getAllItemsSortedDesc();
+
     @Query("SELECT * FROM inventory_items WHERE LOWER(TRIM(category)) = LOWER(TRIM(:category)) ORDER BY expirationDate ASC")
     LiveData<List<InventoryItem>> getItemsByCategory(String category);
 
+    @Query("SELECT * FROM inventory_items WHERE LOWER(TRIM(category)) = LOWER(TRIM(:category)) ORDER BY expirationDate DESC")
+    LiveData<List<InventoryItem>> getItemsByCategorySortedDesc(String category);
+
     @Query("SELECT * FROM inventory_items WHERE expirationDate <= :expirationThreshold ORDER BY expirationDate ASC")
     LiveData<List<InventoryItem>> getItemsNearingExpiration(Date expirationThreshold);
+
+    @Query("SELECT * FROM inventory_items WHERE expirationDate <= :expirationThreshold ORDER BY expirationDate DESC")
+    LiveData<List<InventoryItem>> getItemsNearingExpirationSortedDesc(Date expirationThreshold);
 
     @Query("SELECT * FROM inventory_items WHERE id = :id")
     LiveData<InventoryItem> getItemById(int id);

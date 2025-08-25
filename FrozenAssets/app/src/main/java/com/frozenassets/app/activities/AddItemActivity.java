@@ -387,7 +387,7 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     private boolean validateName() {
-        String name = nameInput.getText().toString().trim();
+        String name = nameInput.getText() != null ? nameInput.getText().toString().trim() : "";
         if (TextUtils.isEmpty(name)) {
             nameLayout.setError(getString(R.string.error_name_required));
             return false;
@@ -415,7 +415,7 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     private boolean validateQuantity() {
-        String quantityStr = quantityInput.getText().toString().trim();
+        String quantityStr = quantityInput.getText() != null ? quantityInput.getText().toString().trim() : "";
         if (TextUtils.isEmpty(quantityStr)) {
             quantityLayout.setError(getString(R.string.error_quantity_required));
             return false;
@@ -439,7 +439,7 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     private boolean validateUnit() {
-        String unit = unitInput.getText().toString().trim();
+        String unit = unitInput.getText() != null ? unitInput.getText().toString().trim() : "";
         if (TextUtils.isEmpty(unit)) {
             unitLayout.setError(null);
             return true;
@@ -461,10 +461,11 @@ public class AddItemActivity extends AppCompatActivity {
                 return;
             }
 
-            String name = nameInput.getText().toString().trim();
-            String category = categoryInput.getText().toString().trim();
-            int quantity = Integer.parseInt(quantityInput.getText().toString().trim());
-            String unit = unitInput.getText().toString().trim();
+            String name = nameInput.getText() != null ? nameInput.getText().toString().trim() : "";
+            String category = categoryInput.getText() != null ? categoryInput.getText().toString().trim() : "";
+            String quantityStr = quantityInput.getText() != null ? quantityInput.getText().toString().trim() : "0";
+            int quantity = Integer.parseInt(quantityStr);
+            String unit = unitInput.getText() != null ? unitInput.getText().toString().trim() : "";
             ArrayList<String> selectedTags = getSelectedTags();
 
             if (isEditMode && currentItem != null) {
@@ -604,10 +605,10 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(KEY_NAME, nameInput.getText().toString());
-        outState.putString(KEY_CATEGORY, categoryInput.getText().toString());
-        outState.putString(KEY_QUANTITY, quantityInput.getText().toString());
-        outState.putString(KEY_UNIT, unitInput.getText().toString());
+        outState.putString(KEY_NAME, nameInput.getText() != null ? nameInput.getText().toString() : "");
+        outState.putString(KEY_CATEGORY, categoryInput.getText() != null ? categoryInput.getText().toString() : "");
+        outState.putString(KEY_QUANTITY, quantityInput.getText() != null ? quantityInput.getText().toString() : "0");
+        outState.putString(KEY_UNIT, unitInput.getText() != null ? unitInput.getText().toString() : "");
         outState.putLong(KEY_DATE, dateFrozen.getTime());
         outState.putStringArrayList(KEY_SELECTED_TAGS, getSelectedTags());
         outState.putInt(KEY_FREEZE_MONTHS, freezeMonths);
@@ -615,13 +616,16 @@ public class AddItemActivity extends AppCompatActivity {
 
     private boolean hasUnsavedChanges() {
         if (isEditMode && currentItem != null) {
-            return !currentItem.getName().equals(nameInput.getText().toString()) ||
-                    !currentItem.getCategory().equals(categoryInput.getText().toString()) ||
-                    currentItem.getQuantity() != Integer.parseInt(quantityInput.getText().toString().isEmpty() ? "0" : quantityInput.getText().toString()) ||
+            String nameText = nameInput.getText() != null ? nameInput.getText().toString() : "";
+            String categoryText = categoryInput.getText() != null ? categoryInput.getText().toString() : "";
+            String quantityText = quantityInput.getText() != null ? quantityInput.getText().toString() : "0";
+            return !currentItem.getName().equals(nameText) ||
+                    !currentItem.getCategory().equals(categoryText) ||
+                    currentItem.getQuantity() != Integer.parseInt(quantityText.isEmpty() ? "0" : quantityText) ||
                     !currentItem.getDateFrozen().equals(dateFrozen) ||
                     currentItem.getMaxFreezeDays() != (freezeMonths * 30) ||
                     !getSelectedTags().equals(currentItem.getTags()) ||
-                    !TextUtils.equals(currentItem.getWeightUnit(), unitInput.getText().toString());
+                    !TextUtils.equals(currentItem.getWeightUnit(), unitInput.getText() != null ? unitInput.getText().toString() : "");
         } else {
             return !TextUtils.isEmpty(nameInput.getText()) ||
                     !TextUtils.isEmpty(categoryInput.getText()) ||

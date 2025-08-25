@@ -5,14 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.WindowManager;
 import android.os.Build;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.content.DialogInterface;
 import androidx.appcompat.app.AlertDialog;
 
 import androidx.annotation.NonNull;
@@ -44,7 +41,6 @@ public class EatSoonActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawerLayout;
     private InventoryViewModel viewModel;
     private InventoryAdapter adapter;
-    private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private LiveData<List<InventoryItem>> expiringItemsLiveData = null;
     private ActionMode actionMode;
     private ActionMode.Callback actionModeCallback;
@@ -258,7 +254,7 @@ public class EatSoonActivity extends AppCompatActivity implements NavigationView
                 
                 adview.setAdListener(new com.google.android.gms.ads.AdListener() {
                     @Override
-                    public void onAdFailedToLoad(com.google.android.gms.ads.LoadAdError loadAdError) {
+                    public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
                         Log.w(TAG, "Ad failed to load: " + loadAdError.getMessage());
                     }
                     

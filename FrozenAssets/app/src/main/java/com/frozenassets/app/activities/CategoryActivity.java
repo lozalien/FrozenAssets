@@ -3,6 +3,7 @@ package com.frozenassets.app.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.frozenassets.app.R;
 import com.frozenassets.app.ViewModels.InventoryViewModel;
 import com.frozenassets.app.adapters.InventoryAdapter;
 import com.frozenassets.app.models.InventoryItem;
+import com.frozenassets.app.models.SortOrder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -28,6 +30,7 @@ public class CategoryActivity extends AppCompatActivity {
     private InventoryViewModel viewModel;
     private InventoryAdapter adapter;
     private String categoryName;
+    private SortOrder currentSortOrder = SortOrder.EXPIRATION_ASC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +142,8 @@ public class CategoryActivity extends AppCompatActivity {
         }
 
         try {
-            Log.d(TAG, "Loading items for category: " + categoryName);
-            viewModel.getItemsByCategory(categoryName).observe(this, items -> {
+            Log.d(TAG, "Loading items for category: " + categoryName + " with sort order: " + currentSortOrder);
+            viewModel.getItemsByCategory(categoryName, currentSortOrder).observe(this, items -> {
                 if (isFinishing() || isDestroyed()) return;
                 
                 Log.d(TAG, "Category " + categoryName + " loaded. Count: " + (items != null ? items.size() : 0));
@@ -185,11 +188,48 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem sortItem = menu.findItem(R.id.action_sort);
+        if (sortItem != null) {
+            // Update the sort icon title based on current sort order
+            if (currentSortOrder == SortOrder.EXPIRATION_ASC) {
+                sortItem.setTitle(R.string.sort_expiring_first);
+            } else {
+                sortItem.setTitle(R.string.sort_expiring_last);
+            }
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
             finish();
+            return true;
+        } else if (itemId == R.id.action_sort) {
+            toggleSortOrder();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void toggleSortOrder() {
+        // Toggle the sort order
+        currentSortOrder = (currentSortOrder == SortOrder.EXPIRATION_ASC) 
+            ? SortOrder.EXPIRATION_DESC 
+            : SortOrder.EXPIRATION_ASC;
+        
+        // Refresh the menu to update the icon
+        invalidateOptionsMenu();
+        
+        // Reload the data with new sort order
+        loadCategoryItems();
     }
 }

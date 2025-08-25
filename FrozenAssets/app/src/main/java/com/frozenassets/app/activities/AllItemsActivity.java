@@ -5,14 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.WindowManager;
 import android.os.Build;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.content.DialogInterface;
 import androidx.appcompat.app.AlertDialog;
 
 import androidx.annotation.NonNull;
@@ -30,6 +27,7 @@ import androidx.activity.OnBackPressedCallback;
 import com.frozenassets.app.R;
 import com.frozenassets.app.adapters.InventoryAdapter;
 import com.frozenassets.app.models.InventoryItem;
+import com.frozenassets.app.models.SortOrder;
 import com.frozenassets.app.ViewModels.InventoryViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -44,10 +42,10 @@ public class AllItemsActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawerLayout;
     private InventoryViewModel viewModel;
     private InventoryAdapter adapter;
-    private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private LiveData<List<InventoryItem>> allItemsLiveData = null;
     private ActionMode actionMode;
     private ActionMode.Callback actionModeCallback;
+    private SortOrder currentSortOrder = SortOrder.EXPIRATION_ASC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,12 +138,12 @@ public class AllItemsActivity extends AppCompatActivity implements NavigationVie
                 allItemsLiveData.removeObservers(this);
             }
 
-            allItemsLiveData = viewModel.getAllItems();
+            allItemsLiveData = viewModel.getAllItems(currentSortOrder);
             if (allItemsLiveData != null) {
                 allItemsLiveData.observe(this, items -> {
                     if (isFinishing() || isDestroyed()) return;
                     
-                    Log.d(TAG, "Updating all items. Count: " + (items != null ? items.size() : 0));
+                    Log.d(TAG, "Updating all items. Count: " + (items != null ? items.size() : 0) + " with sort order: " + currentSortOrder);
                     if (adapter != null) {
                         adapter.submitList(null); // Clear current list
                         adapter.submitList(items); // Add new items
@@ -258,7 +256,7 @@ public class AllItemsActivity extends AppCompatActivity implements NavigationVie
                 
                 adview.setAdListener(new com.google.android.gms.ads.AdListener() {
                     @Override
-                    public void onAdFailedToLoad(com.google.android.gms.ads.LoadAdError loadAdError) {
+                    public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
                         Log.w(TAG, "Ad failed to load: " + loadAdError.getMessage());
                     }
                     
@@ -326,6 +324,49 @@ public class AllItemsActivity extends AppCompatActivity implements NavigationVie
             Log.e(TAG, "Error navigating to category: " + category, e);
             Toast.makeText(this, "Error opening category", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem sortItem = menu.findItem(R.id.action_sort);
+        if (sortItem != null) {
+            // Update the sort icon title based on current sort order
+            if (currentSortOrder == SortOrder.EXPIRATION_ASC) {
+                sortItem.setTitle(R.string.sort_expiring_first);
+            } else {
+                sortItem.setTitle(R.string.sort_expiring_last);
+            }
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_sort) {
+            toggleSortOrder();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void toggleSortOrder() {
+        // Toggle the sort order
+        currentSortOrder = (currentSortOrder == SortOrder.EXPIRATION_ASC) 
+            ? SortOrder.EXPIRATION_DESC 
+            : SortOrder.EXPIRATION_ASC;
+        
+        // Refresh the menu to update the icon
+        invalidateOptionsMenu();
+        
+        // Reload the data with new sort order
+        loadAllItems();
     }
 
     private void setupOnBackPressedCallback() {

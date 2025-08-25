@@ -61,11 +61,16 @@
     <string name="days">days</string>
     <string name="decrease_time">Decrease time</string>
     <string name="increase_time">Increase time</string>
+    <string name="increase_freeze_time">Increase freeze time</string>
+    <string name="decrease_freeze_time">Decrease freeze time</string>
+    <string name="manage_tags">Manage Tags</string>
+    <string name="sort_expiring_first">Sort: Expiring First</string>
+    <string name="sort_expiring_last">Sort: Latest Expiring First</string>
     <string name="usda_recommended">USDA Recommended: %d days</string>
 
     <string name="unit_optional">Unit (Optional)</string>
     <string name="unit_hint">Enter unit details</string>
-    <string name="helper_unit">Example: kg, 1/2 Pan, Freezer Bag</string>
+    <string name="helper_unit">Example: kg, ½ Pan, Freezer Bag</string>
 
 
 
@@ -101,7 +106,7 @@
     <string name="import_json">Import JSON</string>
     <string name="import_export_info">Export your inventory data to backup files or import from existing files. CSV format is compatible with spreadsheet applications.</string>
     <string name="data_info">Data Information</string>
-    <string name="total_items_placeholder">Total items: Loading...</string>
+    <string name="total_items_placeholder">Total items: Loading…</string>
     <string name="last_export_placeholder">Last export: Never</string>
     <string name="last_import_placeholder">Last import: Never</string>
     <string name="total_items_count">Total items: %d</string>
@@ -113,8 +118,8 @@
     <string name="import_failed">Failed to import data: %s</string>
     <string name="no_file_selected">No file selected</string>
     <string name="permission_denied">Permission denied. Cannot access storage.</string>
-    <string name="creating_file">Creating export file...</string>
-    <string name="reading_file">Reading import file...</string>
+    <string name="creating_file">Creating export file…</string>
+    <string name="reading_file">Reading import file…</string>
     <string name="confirm_import">Import %d items from file? This will add to your existing inventory.</string>
     <string name="import_confirm_title">Confirm Import</string>
     <string name="import_action">Import</string>

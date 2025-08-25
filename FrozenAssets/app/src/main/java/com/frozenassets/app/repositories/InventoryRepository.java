@@ -10,6 +10,7 @@ import com.frozenassets.app.database.InventoryDao;
 import com.frozenassets.app.database.InventoryDatabase;
 import com.frozenassets.app.models.InventoryItem;
 import com.frozenassets.app.models.FoodCategory;
+import com.frozenassets.app.models.SortOrder;
 import com.frozenassets.app.utils.DateUtils;
 
 import java.util.Date;
@@ -66,6 +67,17 @@ public class InventoryRepository {
         return allItems;
     }
 
+    // Get all items with sorting
+    public LiveData<List<InventoryItem>> getAllItems(SortOrder sortOrder) {
+        switch (sortOrder) {
+            case EXPIRATION_DESC:
+                return inventoryDao.getAllItemsSortedDesc();
+            case EXPIRATION_ASC:
+            default:
+                return inventoryDao.getAllItems();
+        }
+    }
+
     // Get all categories
     public LiveData<List<String>> getAllCategories() {
         return allCategories;
@@ -76,10 +88,33 @@ public class InventoryRepository {
         return inventoryDao.getItemsByCategory(category);
     }
 
+    // Get items by category with sorting
+    public LiveData<List<InventoryItem>> getItemsByCategory(String category, SortOrder sortOrder) {
+        switch (sortOrder) {
+            case EXPIRATION_DESC:
+                return inventoryDao.getItemsByCategorySortedDesc(category);
+            case EXPIRATION_ASC:
+            default:
+                return inventoryDao.getItemsByCategory(category);
+        }
+    }
+
     // Get items nearing expiration (within two months)
     public LiveData<List<InventoryItem>> getItemsNearingExpiration() {
         Date threshold = DateUtils.getExpirationThreshold();
         return inventoryDao.getItemsNearingExpiration(threshold);
+    }
+
+    // Get items nearing expiration with sorting
+    public LiveData<List<InventoryItem>> getItemsNearingExpiration(SortOrder sortOrder) {
+        Date threshold = DateUtils.getExpirationThreshold();
+        switch (sortOrder) {
+            case EXPIRATION_DESC:
+                return inventoryDao.getItemsNearingExpirationSortedDesc(threshold);
+            case EXPIRATION_ASC:
+            default:
+                return inventoryDao.getItemsNearingExpiration(threshold);
+        }
     }
 
     // Insert item
