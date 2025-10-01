@@ -4,10 +4,7 @@
 
     <!-- Add this to ensure proper behavior on Android 14+ -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-    <!-- Ad permissions -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    
+
     <!-- File permissions for import/export -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -25,14 +22,6 @@
         android:hardwareAccelerated="true"
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="34">
-
-        <property
-            android:name="android.adservices.AD_SERVICES_CONFIG"
-            android:resource="@xml/gma_ad_services_config"
-            tools:replace="android:resource" />
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-1475670570864118~4943830798" />
 
         <activity
             android:name="com.frozenassets.app.activities.AllItemsActivity"

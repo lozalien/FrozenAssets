@@ -1,15 +1,27 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+
+# IntelliJ IDEA
+.idea/
+
+# Claude Code
+.claude/
+
+# macOS
 .DS_Store
+
+# Build outputs
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+# APK/AAB files (optional - uncomment if you don't want to track built APKs)
+# *.apk
+# *.aab
+
+# Keystore files (IMPORTANT - never commit these!)
+*.jks
+*.keystore

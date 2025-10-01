@@ -1,7 +1,3 @@
-# Keep AdMob classes and their dependencies
--keep class com.google.android.gms.ads.** { *; }
--keep class com.google.android.gms.internal.ads.** { *; }
-
 # Keep the missing classes that are causing the error
 -dontwarn android.media.LoudnessCodecController
 -dontwarn android.media.LoudnessCodecController$OnLoudnessCodecUpdateListener

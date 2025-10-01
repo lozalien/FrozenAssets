@@ -72,14 +72,6 @@ public class FrozenAssetsInstrumentedTest {
         }
     }
 
-    @Test
-    public void adViewExists() {
-        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
-            // Verify AdView is present (even if ad doesn't load in tests)
-            Espresso.onView(ViewMatchers.withId(R.id.adView))
-                    .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        }
-    }
 
     @Test
     public void orientationChangeHandled() {

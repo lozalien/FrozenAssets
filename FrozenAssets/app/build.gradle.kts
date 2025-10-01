@@ -64,12 +64,7 @@ android {
 }
 
 dependencies {
-    implementation("com.google.android.material:material:1.12.0-alpha02") {
-        exclude(group = "com.google.android.gms", module = "play-services-basement")
-    }
-
-    //Advertisements
-    implementation("com.google.android.gms:play-services-ads:23.6.0")
+    implementation("com.google.android.material:material:1.12.0-alpha02")
 
     // Core Android dependencies
     implementation(libs.appcompat)
@@ -79,7 +74,6 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.window:window:1.2.0")
     implementation("androidx.concurrent:concurrent-futures:1.1.0")
-    implementation(libs.play.services.ads)
 
     // Room dependencies
     val roomVersion = "2.6.1"

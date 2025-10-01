@@ -28,9 +28,6 @@ import com.frozenassets.app.models.SortOrder;
 import com.frozenassets.app.ViewModels.InventoryViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.List;
 
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate started");
-        MobileAds.initialize(this, initializationStatus -> {});
 
         try {
             // Enable hardware acceleration safely
@@ -67,9 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Initialize ViewModel - do this synchronously
             setupViewModel();
             setupFAB();
-
-            // Initialize AdMob banner with error handling
-            setupAdMob();
 
             // Default to showing "Eat Soon" items
             setTitle(R.string.expiring_items);
@@ -241,34 +234,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void setupAdMob() {
-        try {
-            AdView adview = findViewById(R.id.adView);
-            if (adview != null) {
-                AdRequest adRequest = new AdRequest.Builder().build();
-                adview.loadAd(adRequest);
-                
-                adview.setAdListener(new com.google.android.gms.ads.AdListener() {
-                    @Override
-                    public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
-                        Log.w(TAG, "Ad failed to load: " + loadAdError.getMessage());
-                    }
-                    
-                    @Override
-                    public void onAdLoaded() {
-                        Log.d(TAG, "Ad loaded successfully");
-                    }
-                });
-                
-                Log.d(TAG, "AdView setup complete");
-            } else {
-                Log.w(TAG, "AdView not found in layout");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error setting up AdMob", e);
-            // Don't crash the app if ads fail
-        }
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

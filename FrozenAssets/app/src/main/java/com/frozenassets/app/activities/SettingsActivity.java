@@ -35,9 +35,6 @@ import com.frozenassets.app.models.InventoryItem;
 import com.frozenassets.app.ViewModels.InventoryViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -77,7 +74,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate started");
-        MobileAds.initialize(this, initializationStatus -> {});
 
         try {
             // Enable hardware acceleration safely
@@ -98,9 +94,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             setupViewModel();
             setupViews();
             setupFileActivityResults();
-
-            // Initialize AdMob banner
-            setupAdMob();
 
             // Set title
             setTitle(getString(R.string.settings));
@@ -224,20 +217,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             });
     }
 
-    private void setupAdMob() {
-        try {
-            AdView adview = findViewById(R.id.adView);
-            if (adview != null) {
-                AdRequest adRequest = new AdRequest.Builder().build();
-                adview.loadAd(adRequest);
-                Log.d(TAG, "AdView setup complete");
-            } else {
-                Log.w(TAG, "AdView not found in layout");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error setting up AdMob", e);
-        }
-    }
 
     private void setupOnBackPressedCallback() {
         try {
