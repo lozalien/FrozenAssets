@@ -1,11 +1,3 @@
-<img width="30%" alt="Screenshot_20251030_160521" src="https://github.com/user-attachments/assets/a48a04bf-c167-4ca0-a433-8a8d1e23be75" />
-<br>
-<img width="30%" alt="Screenshot_20251030_160650" src="https://github.com/user-attachments/assets/5514d229-87e2-4a62-b886-4c4b9821d47f" />
-<br>
-<img width="30%" alt="Screenshot_20251030_160717" src="https://github.com/user-attachments/assets/c583f69b-0e7c-4f80-85a5-eade43b30d93" />
-<br>
-<img width="30%" alt="Screenshot_20251030_161049" src="https://github.com/user-attachments/assets/e38dba81-0e65-4e03-ab70-d8f7238b4d92" />
-<br>
 # Frozen Assets
 
 A modern Android application for managing frozen food inventory, helping you track what's in your freezer and never let food go to waste.
@@ -18,6 +10,17 @@ Frozen Assets is a comprehensive freezer inventory management app that helps you
 - Get alerts for items that are expiring soon
 - Monitor quantities and weights of stored items
 - Search and sort your entire freezer inventory
+<br>
+<br>
+<img width="30%" alt="Screenshot_20251030_160521" src="https://github.com/user-attachments/assets/a48a04bf-c167-4ca0-a433-8a8d1e23be75" />
+<br><br>
+<img width="30%" alt="Screenshot_20251030_160650" src="https://github.com/user-attachments/assets/5514d229-87e2-4a62-b886-4c4b9821d47f" />
+<br><br>
+<img width="30%" alt="Screenshot_20251030_160717" src="https://github.com/user-attachments/assets/c583f69b-0e7c-4f80-85a5-eade43b30d93" />
+<br><br>
+<img width="30%" alt="Screenshot_20251030_161049" src="https://github.com/user-attachments/assets/e38dba81-0e65-4e03-ab70-d8f7238b4d92" />
+<br>
+<br>
 
 ## Features
 
