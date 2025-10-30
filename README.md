@@ -92,34 +92,6 @@ com.frozenassets.app/
     └── ListConverter.java
 ```
 
-## Getting Started
-
-### Prerequisites
-- Android Studio (latest version recommended)
-- Android SDK 24 or higher
-- JDK 11
-
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/lozalien/FrozenAssets.git
-   ```
-
-2. Open the project in Android Studio
-
-3. Sync Gradle files
-
-4. Run the app on an emulator or physical device
-
-### Building
-```bash
-# Debug build
-./gradlew assembleDebug
-
-# Release build
-./gradlew assembleRelease
-```
-
 ## Usage
 
 ### Adding Items
