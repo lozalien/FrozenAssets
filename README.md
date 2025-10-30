@@ -102,7 +102,7 @@ com.frozenassets.app/
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/frozen-assets.git
+   git clone https://github.com/lozalien/FrozenAssets.git
    ```
 
 2. Open the project in Android Studio
@@ -176,52 +176,7 @@ Navigate through the drawer menu to view items by category:
 - `name` (String, Required, Unique)
 - `isDefault` (Boolean)
 
-## Version History
 
-- **v2.4** (Current)
-  - Multi-select bulk delete functionality
-  - Enhanced tag management
-  - Android 14 compatibility improvements
-  - UI/UX enhancements
-
-## Permissions
-
-- `READ_EXTERNAL_STORAGE` - For importing data
-- `WRITE_EXTERNAL_STORAGE` - For exporting data
-- `MANAGE_EXTERNAL_STORAGE` (Android 11+) - Enhanced file access
-- `FOREGROUND_SERVICE_DATA_SYNC` (Android 14+) - Database sync service
-
-## Firebase Integration
-
-The app includes Firebase Crashlytics and Analytics for:
-- Crash reporting and diagnostics
-- Usage analytics (anonymized)
-- Performance monitoring
-
-## Contributing
-
-Contributions are welcome! Please follow these guidelines:
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Material Design components and guidelines
-- Android Jetpack libraries
-- Room Persistence Library documentation
-
-## Support
-
-For issues, questions, or suggestions:
-- Open an issue on GitHub
-- Contact the development team
 
 ---
 
